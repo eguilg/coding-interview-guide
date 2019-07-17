@@ -94,7 +94,7 @@ public:
     ~minStack3(){};
 
     void push(int val){
-        if (cur_min > INT_MAX && stackDiff.empty())
+        if (cur_min > INT_MAX)
         {
             cur_min = val;
         } else {
@@ -107,7 +107,7 @@ public:
     }
 
     int pop(){
-        assert(stackDiff.empty() && cur_min > INT_MAX);
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
         int ret;
         if (stackDiff.empty())
         {
@@ -124,8 +124,16 @@ public:
         return ret;
     }
 
-    int getMine(){
-        assert(stackDiff.empty() && cur_min > INT_MAX);
+    int top(){
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
+        if (stackDiff.empty() || stackDiff.top() <= 0){
+            return int(cur_min);
+        }
+        return int(cur_min) + stackDiff.top();
+    }
+
+    int getMin(){
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
         return cur_min;
     } 
 };
@@ -142,7 +150,7 @@ int main()
         }
     }
     cout << "------" << endl;
-    minStack1 ms2;
+    minStack2 ms2;
     
     for (int d: data)
     {
@@ -154,7 +162,7 @@ int main()
     }
 
     cout << "------" << endl;
-    minStack1 ms3;
+    minStack3 ms3;
     
     for (int d: data)
     {
