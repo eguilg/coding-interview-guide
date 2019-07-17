@@ -102,21 +102,24 @@ public:
 };
 ```
 ## 方案三 
-只需要一个栈实现，栈中存储每个元素和上一步的栈内最小值的差，另外用一个变量存储当前的最小值。 
+只需要一个栈实现，栈```stackDiff```中存储每个元素和**上一步栈内最小值**的**差**，另外用一个变量```cur_min```存储当前的最小值。 
 
-初始状态： 栈为空 而且 最小值>INT_MAX。
+栈顶：
+* 如果```stackDiff.top() <= 0```，那么当前栈顶元素就是```cur_min```;
+* 如果```stackDiff.top() > 0```，那么当前栈顶元素则是```cur_min + stackDiff.top()```;
+
+初始状态: 栈为空 而且 最小值>INT_MAX。
 
 入栈第一个元素时： 栈仍为空，但是当前最小值为该元素
 
 入栈： 
-1. 如果当时栈为空 且 cur_min无效(>INT_MAX),设置```cur_min = val```
-2. 如果栈不为空，stackDiff中插入```val - cur_min```，
-
-    若```val - cur_min < 0```，即当前插入的是新的最小值，设置```cur_min = val ```
+* 如果当时栈为空 且 cur_min无效(>INT_MAX),设置```cur_min = val```
+* 如果栈不为空，stackDiff中插入```val - cur_min```，
+    * 若```val - cur_min < 0```，即当前插入的是新的最小值，设置```cur_min = val ```
 
 出栈：
 1. 若栈为空，则返回值为```cur_min```，然后另```cur_min```为初始值(```INT_MAX+1```)
-2. 若```stackDiff.top() <= 0```，表示当前栈顶为最小值， 返回```cur_min```, 更新```cur_min```为上一次的最小值即```cur_min - stackDiff.top()```, 然后```stackDiff.pop()```
+2. 若```stackDiff.top() <= 0```，表示当前栈顶为最小值， 返回```cur_min```, 更新```cur_min```为上一次的最小值即```cur_min = cur_min - stackDiff.top()```, 然后```stackDiff.pop()```
 3. 若```stackDiff.top() > 0```, 则当前栈顶出栈之后最小值不会变化，返回当前栈顶元素```cur_min + stackDiff.top()```, 然后```stackDiff.pop()```
 
 getMin: 判断是否空栈，非空的话直接返回```cur_min```即可
