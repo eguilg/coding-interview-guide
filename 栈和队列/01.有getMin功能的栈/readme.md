@@ -124,6 +124,9 @@ public:
 
 getMin: 判断是否空栈，非空的话直接返回```cur_min```即可
 ```cpp
+/***
+ * 方案3
+ */
 class minStack3{
 private:
     stack<int> stackDiff;
@@ -134,7 +137,7 @@ public:
     ~minStack3(){};
 
     void push(int val){
-        if (cur_min > INT_MAX && stackDiff.empty())
+        if (cur_min > INT_MAX)
         {
             cur_min = val;
         } else {
@@ -147,12 +150,12 @@ public:
     }
 
     int pop(){
-        assert(stackDiff.empty() && cur_min > INT_MAX);
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
         int ret;
         if (stackDiff.empty())
         {
             ret = cur_min;
-            cur_min = INT_MAX + 1;
+            cur_min = long(INT_MAX) + 1;
         } else if (stackDiff.top() <= 0){
             ret =  int(cur_min);
             cur_min = cur_min - (long)stackDiff.top();
@@ -164,8 +167,16 @@ public:
         return ret;
     }
 
+    int top(){
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
+        if (stackDiff.empty() || stackDiff.top() <= 0){
+            return int(cur_min);
+        }
+        return int(cur_min) + stackDiff.top();
+    }
+
     int getMin(){
-        assert(stackDiff.empty() && cur_min > INT_MAX);
+        assert(!stackDiff.empty() || cur_min <= INT_MAX);
         return cur_min;
     } 
 };
