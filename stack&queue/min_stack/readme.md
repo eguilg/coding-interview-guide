@@ -161,7 +161,7 @@ public:
         return ret;
     }
 
-    int getMine(){
+    int getMin(){
         assert(stackDiff.empty() && cur_min > INT_MAX);
         return cur_min;
     } 
