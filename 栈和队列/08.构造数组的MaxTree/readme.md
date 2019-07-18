@@ -55,9 +55,7 @@ TreeNode* getMaxTree(vector<int> & arr){
         s.push(i);
     }
     // 清空栈
-    s = stack<int>();
-    // 存根节点的索引
-    int root_idx = -1;
+    s = stack<int>(); 
     // 找每个数右边比它大的第一个，并且与左边比他大的第一个比较，去最小的
     for(int i = arr.size()-1; i >= 0; --i)
     {
@@ -67,11 +65,7 @@ TreeNode* getMaxTree(vector<int> & arr){
         }
         if (!s.empty() && (parents[i] == -1 || arr[parents[i]] > arr[s.top()])){
             parents[i] = s.top();
-        }
-        if (parents[i] == -1)
-        {
-            root_idx = i;
-        }
+        } 
         s.push(i);
     }
 
