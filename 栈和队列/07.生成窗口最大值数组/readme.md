@@ -24,6 +24,8 @@
 弹出规则：
 * 若```qmax```头部等于```i-w```表示队列头应该出窗口，弹出队头。
 
+每个下标最多进、出```qmax```一次，复杂度O(n)。
+
 ```cpp
 vector<int> sliding_windwo_maximums(vector<int> &arr, int w)
 {
