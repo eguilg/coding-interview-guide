@@ -25,7 +25,8 @@ int max_rect_in_hist(vector<int>& hist)
         maxS.pop();
         int k = maxS.empty()? -1 : maxS.top();
         ans = max(ans, int(hist[j] * (hist.size() - k -1)));
-    }
+    } 
+  
     return ans;
 }
 
