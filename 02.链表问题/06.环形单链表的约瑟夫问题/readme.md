@@ -50,7 +50,7 @@ Node* josephusKill1(Node* head, int m){
 |---|---|
 |s-2|i-2|
 |s-1|i-1|
-|s|\|
+|s|deleted|
 |s+1|1|
 |s+2|2|
 |...|...|
