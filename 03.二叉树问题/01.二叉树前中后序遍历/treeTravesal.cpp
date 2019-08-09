@@ -81,7 +81,7 @@ void posOrder(Node* head) {
     Node* seen = head;
 
     while (!s.empty()) {
-        head = s->top();
+        head = s.top();
         if (head->left && seen != head->left && seen != head->right) { // 左右都没见过，而且有左边孩子
             s.push(head->left); 
         } else if (head->right && seen != head->right) { // 左边刚见过或者没有左边孩子， 同时右边孩子存在且没见过
