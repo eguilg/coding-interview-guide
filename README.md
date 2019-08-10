@@ -1,6 +1,7 @@
 # coding-interview-guide
 Practicing codes &amp; notes for book Coding Interview Guide.
 
+实在写不下去就抄一抄代码也行，别停下来，别让自己手生了。
 ### [栈和队列](01.栈和队列/)
 + [有getMin功能的栈](01.栈和队列/01.有getMin功能的栈/)
 + [两个栈组成的队列](01.栈和队列/02.两个栈组成的队列/)
