@@ -32,7 +32,7 @@ void posOrderRecur(Node* head) {
     }
     posOrderRecur(head->left);
     posOrderRecur(head->right);
-    cout << head->val << endl;
+    cout << head->val << " ";
 }
 
 void preOrder(Node* head) {
@@ -43,7 +43,7 @@ void preOrder(Node* head) {
     s.push(head);
     while(!s.empty()) {
         head = s.top(); s.pop();
-        cout << head->val;
+        cout << head->val << " ";
         if (head->right) {
             s.push(head->right);
         }
@@ -93,4 +93,27 @@ void posOrder(Node* head) {
         }
     }
     cout << endl;
+}
+
+int main(){
+    Node n1(1);
+    Node n2(2);
+    Node n3(3);
+    Node n4(4);
+    Node n5(5);
+    Node n6(6);
+
+    /*
+                1
+        2               3
+            4       5       6
+     */
+    n1.left = &n2;
+    n1.right = &n3;
+    n2.right = &n4;
+    n3.left = &n5;
+    n3.right = &n6;
+    preOrder(&n1);
+    inOrder(&n1);
+    posOrder(&n1); 
 }
