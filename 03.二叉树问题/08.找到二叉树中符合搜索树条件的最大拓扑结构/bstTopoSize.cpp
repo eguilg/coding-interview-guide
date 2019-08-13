@@ -104,8 +104,7 @@ int postOrder(Node* head, map<Node*, Record>& m) {
     int r_contrib = getTopoContrib(head, m, false);
 
     m[head] = Record(l_contrib, r_contrib);
-    return max(l_contrib + r_contrib + 1, max(l_size, r_size));
-
+    return max(l_contrib + r_contrib + 1, max(l_size, r_size)); 
 }
 
 int bstTopoSize2(Node* head) {
@@ -124,8 +123,8 @@ int main() {
 
     /*
                 5
-        3               6
-            4       8       7
+        3               4
+            6       8       7
      */
     n1.left = &n2;
     n1.right = &n3;
