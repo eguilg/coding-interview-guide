@@ -69,6 +69,30 @@ vector<int> minKbyHeap(vector<int>& arr, int k) {
     return heap; 
 }
 
+/***
+ * 使用STL的heap实现
+ */
+vector<int> minKbySTLHeap(vector<int>& arr, int k) {
+    if (k >= arr.size()) {
+        return arr;
+    }
+    if (k < 1) {
+        return vector<int>();
+    }
+    vector<int> heap(k, INT_MAX);
+    for (int i = 0; i < k; ++i) {
+        heap[i] = arr[i];
+    }
+    make_heap(heap.begin(), heap.end(), less<int>());
+    for (int i = k; i < arr.size(); ++i) {
+        if (arr[i] < heap[0]) {
+            pop_heap(heap.begin(), heap.end(), less<int>());
+            heap[k-1] = arr[i];
+            push_heap(heap.begin(), heap.end(), less<int>());
+        }
+    }
+    return heap;
+}
 
 /***********************************
  * 方案二， BFPRT 找到第k小的元素
@@ -186,20 +210,35 @@ vector<int> minKbyBFPRT(vector<int>& arr, int k) {
     return ret;
 }
 int main(){
-    vector<int> arr(100000000, 0);
+    vector<int> arr(1000000000, 0);
     for (int i = 0; i < arr.size(); ++i){
         arr[i] = rand();
     }
     clock_t start1 = clock();
-    vector<int> minK1 = minKbyHeap(arr, 10);
+    vector<int> minK1 = minKbyHeap(arr, 4);
     clock_t end1 = clock();
-    vector<int> minK2 = minKbyBFPRT(arr, 10);
+    
+    vector<int> minK2 = minKbySTLHeap(arr, 4);
     clock_t end2 = clock();
+
+    vector<int> minK3 = minKbyBFPRT(arr, 4);
+    clock_t end3 = clock();
+    
 
     cout << end1 - start1 <<endl;
     cout << end2 - end1 <<endl;
+    cout << end3 - end2 <<endl;
 
+    for (auto a : minK1) {
+        cout << a << " ";
+    }
+
+    cout << endl;
     for (auto a : minK2) {
+        cout << a << " ";
+    }
+    cout << endl;
+     for (auto a : minK3) {
         cout << a << " ";
     }
     cout << endl;
